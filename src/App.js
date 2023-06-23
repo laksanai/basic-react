@@ -1,25 +1,36 @@
-import logo from './logo.svg';
+import {useState} from 'react'
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [noteContent, setNoteContent] = useState('')
+    const [noteAuthor, setNoteAuthor] = useState('')
+
+
+    return (
+        <section className="app-section">
+            <div className='app-container'>
+                <h3>สักหน่อยไหมล่ะ</h3>
+                <p>
+                    <input 
+                        type="text"
+                        placeholder="บันทึกความในใจ"
+                        value={noteContent}
+                        onChange={(event)=>{setNoteContent(event.target.value)}}
+                    />
+                </p>
+                <p>
+                    <input 
+                        type="text"
+                        placeholder="ลงชื่อ"
+                        value={noteAuthor}
+                        onChange={(event)=>{setNoteAuthor(event.target.value)}}
+                    />
+                </p>
+
+            </div>
+        </section>
+    );
 }
 
 export default App;
