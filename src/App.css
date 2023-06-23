@@ -1,0 +1,35 @@
+.app-section{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.app-container{
+  display: flex;
+  width: 400px;
+  flex-direction: column;
+  justify-content: flex-start;
+  
+}
+
+.app-container h3{
+  padding: 0;
+  margin-top: 20px;
+}
+
+.app-container p{
+  margin: 0;
+  padding: 0;
+}
+
+.app-container p textarea{
+  width: 100%;
+}
+
+.app-container p input{
+  width: 100%;
+}
+
+.app-note{
+  background-color: rgb(247, 121, 121);
+}
