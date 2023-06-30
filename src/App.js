@@ -32,12 +32,26 @@ function App() {
         });
     }
 
+    function onNoteDelete(noteId) {
+        setAllNote((prevAllNote)=>{
+            return prevAllNote.filter((theNote)=>{
+                return theNote.id !== noteId;
+            })
+        });
+    }
+
+
     //Elements
     const noteElements = allNote.map((theNote)=>{
         return (
             <div key={theNote.id} className='app-note'>
                 <p>{theNote.content}</p>
                 <h5>{theNote.author}</h5>
+                <p>
+                    <a>Edit</a>
+                    <span> | </span>
+                    <a onClick={()=>{onNoteDelete(theNote.id)}}>Delete</a>
+                </p>
             </div>
         )
     });
@@ -74,6 +88,7 @@ function App() {
                 <div className='app-notes'>
                     {noteElements}
                 </div>
+
             </div>
         </section>
     );

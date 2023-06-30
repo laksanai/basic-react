@@ -28,8 +28,16 @@
 
 .app-container p input{
   width: 100%;
+  margin-bottom: 5px;
 }
 
 .app-note{
   background-color: rgb(247, 121, 121);
+  margin: 5px;
+}
+
+.app-note p a{
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
