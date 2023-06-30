@@ -1,97 +1,35 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import './App.css';
+
 
 function App() {
 
-    //State
-    const [note, setNote] = useState({
-        content:'', author:''
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        fetch('https://reqres.in/api/users?page=2').then(res => {
+            return res.json();
+
+        }).then(resJson => {
+            console.log(resJson);
+            setUsers(resJson.data);
+        });
+    }, []); 
+
+
+    const userElements = users.map((user, index) => {
+        return <h3 key={index}>{user.email}</h3>
     });
-    const [allNote, setAllNote] = useState([]);
-
-
-    //Function
-    function onNoteValueChange(event) {
-        const { name, value } = event.target;
-        setNote((prevNote)=>{
-            return {
-                ...prevNote,
-                [name]: value
-            }
-        });
-    }
-
-    function onNoteSubmit(event) {
-        event.preventDefault();
-
-        setAllNote((prevAllNote) =>{
-
-            const newNote = { ...note };
-            newNote.id = Date.now().toString();
-            return [newNote, ...prevAllNote];
-        });
-    }
-
-    function onNoteDelete(noteId) {
-        setAllNote((prevAllNote)=>{
-            return prevAllNote.filter((theNote)=>{
-                return theNote.id !== noteId;
-            })
-        });
-    }
-
-
-    //Elements
-    const noteElements = allNote.map((theNote)=>{
-        return (
-            <div key={theNote.id} className='app-note'>
-                <p>{theNote.content}</p>
-                <h5>{theNote.author}</h5>
-                <p>
-                    <a>Edit</a>
-                    <span> | </span>
-                    <a onClick={()=>{onNoteDelete(theNote.id)}}>Delete</a>
-                </p>
-            </div>
-        )
-    });
-
 
     return (
-        <section className="app-section">
+        <section className='app-section'>
             <div className='app-container'>
-                <form onSubmit={onNoteSubmit}>
-                    <h3>สักหน่อยไหมล่ะ</h3>
-                    <p>
-                        <textarea
-                            rows="3"
-                            placeholder="บันทึกความในใจ"
-                            name='content'
-                            value={note.content}
-                            onChange={onNoteValueChange}
-                            
-                        />
-                    </p>
-                    <p>
-                        <input 
-                            type="text"
-                            placeholder="ลงชื่อ"
-                            name='author'
-                            value={note.author}
-                            onChange={onNoteValueChange}
-                        />
-                    </p>
-                    <p>
-                        <button type='submit'>เพิ่มข้อมูล</button>
-                    </p>
-                </form>
-                <div className='app-notes'>
-                    {noteElements}
-                </div>
-
+                <h1>เก็บโค้ดส่วนลดไม่ทัน</h1>
+                {userElements}
             </div>
         </section>
     );
+
 }
 
 export default App;
