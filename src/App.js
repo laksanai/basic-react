@@ -1,18 +1,29 @@
-import {createContext , useEffect, useState} from 'react'
+import {createContext , useEffect, useReducer, useState} from 'react'
 import './App.css';
 import LoginArea from './LoginArea';
 
-const fakeUser = {username: 'nice789', fullname: 'เต้า หมิงซื่อ'};
+function reducer(state, action) {
+    if (action.type === 'login') {
+        const { username, fullname } = action.payload;
+        return { username, fullname };
+    } 
+
+    if (action.type === 'logout') {
+        return null;
+    }
+    return state;
+}
+
 
 const AuthContext = createContext();
 
 function App() {
 
-    const [auth, setAuth] = useState(null);
-    
+    const [authState, authDispatch] = useReducer(reducer, null);
+
     return (
 
-        <AuthContext.Provider value={{auth, setAuth}}>
+        <AuthContext.Provider value={{authState, authDispatch}}>
             <section className='app-section'>
                 <div className='app-container'>
                     <LoginArea />
