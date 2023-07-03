@@ -7,10 +7,12 @@ const fakeUser = {username: 'nice789', fullname: 'เต้า หมิงซ�
 const AuthContext = createContext();
 
 function App() {
+
+    const [auth, setAuth] = useState(null);
     
     return (
 
-        <AuthContext.Provider value={fakeUser}>
+        <AuthContext.Provider value={{auth, setAuth}}>
             <section className='app-section'>
                 <div className='app-container'>
                     <LoginArea />
